@@ -4,36 +4,28 @@
         'server': 'ntp',
         'service': 'ntpd',
         'ntpdate': 'ntpdate',
-
         'ntp_conf': '/etc/ntp.conf',
-        'ntpd_conf': '/etc/ntpd.conf',
     },
     'Debian': {
         'client': 'ntp',
         'server': 'ntpd',
         'service': 'ntp',
         'ntpdate': 'ntpdate',
-
         'ntp_conf': '/etc/ntp.conf',
-        'ntpd_conf': '/etc/ntpd.conf',
     },
     'RedHat': {
         'client': 'ntp',
         'server': 'ntpd',
         'service': 'ntpd',
         'ntpdate': 'ntpdate',
-
         'ntp_conf': '/etc/ntp.conf',
-        'ntpd_conf': '/etc/ntpd.conf',
     },
     'Suse': {
         'client': 'ntp',
         'server': 'ntp',
         'service': 'ntpd',
         'ntpdate': 'ntpdate',
-
         'ntp_conf': '/etc/ntp.conf',
-        'ntpd_conf': '/etc/ntpd.conf',
     },
 } %}
 
@@ -44,12 +36,10 @@
     'service': 'ntpd',
     'ntpdate': 'ntpdate',
     'ntp_conf': '/etc/ntp.conf',
-    'ntpd_conf': '/etc/ntpd.conf',
-    'ntp_conf_source': 'salt://ntp/ntp-client.conf',
-    'ntpd_conf_source': 'salt://ntp/ntp.conf',
+    'ntp_conf_source': 'salt://ntp/ntp.conf.jinja',
     'servers': (
-      'sac-corp-ops-adm-01.unix.newokl.com',
-      'sac-corp-ops-adm-02.unix.newokl.com',
+      '0.pool.ntp.org',
+      '1.pool.ntp.org',
       ),
     'localnetworks': '',
     'peers': '',

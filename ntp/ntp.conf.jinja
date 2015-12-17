@@ -1,4 +1,4 @@
-{% from "ntp/map.jinja" import ntp with context %}
+{% from "ntp/map.jinja" import ntp with context -%}
 # This file managed by Salt, do not edit
 #
 #
@@ -6,6 +6,11 @@
 {% for ntpserver in ntp.servers -%}
 server {{ ntpserver }}
 restrict {{ ntpserver }} nomodify
+{% endfor %}
+
+{% for ntppeer in ntp.peers -%}
+peer {{ ntppeer }}
+restrict {{ ntppeer }}
 {% endfor %}
 
 # Only allow read-only access from localhost
