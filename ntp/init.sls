@@ -6,14 +6,10 @@ ntp:
   pkg.installed:
     - name: {{ ntp.client }}
 
-{% set ntp_conf_src = salt['pillar.get']('ntp:ntp_conf') -%}
-
-{% if ntp_conf_src %}
-ntp_conf:
+{{ ntp.ntp_conf }}:
   file.managed:
     - name: {{ ntp.ntp_conf }}
     - template: jinja
-    - source: {{ ntp_conf_src }}
+    - source: {{ ntp.ntp_conf_source }}
     - require:
       - pkg: ntp
-{% endif %}

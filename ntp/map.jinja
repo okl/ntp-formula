@@ -37,8 +37,25 @@
     },
 } %}
 
-{% if grains.get('saltversion', '').startswith('0.17') %}
-{% set ntp = salt['grains.filter_by'](map, merge=salt['pillar.get']('ntp:lookup')) %}
-{% else %}
-{% set ntp = map.get(grains.os_family) %}
-{% endif %}
+
+{% set ntp = { 
+    'client': 'ntp',
+    'server': 'ntpd',
+    'service': 'ntpd',
+    'ntpdate': 'ntpdate',
+    'ntp_conf': '/etc/ntp.conf',
+    'ntpd_conf': '/etc/ntpd.conf',
+    'ntp_conf_source': 'salt://ntp/ntp-client.conf',
+    'ntpd_conf_source': 'salt://ntp/ntp.conf',
+    'servers': (
+      'sac-corp-ops-adm-01.unix.newokl.com',
+      'sac-corp-ops-adm-02.unix.newokl.com',
+      ),
+    'localnetworks': '',
+    'peers': '',
+  }
+%}
+
+
+
+{% do ntp.update(salt['pillar.get']('ntp:lookup', {})) -%}
