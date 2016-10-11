@@ -23,7 +23,11 @@
     'Suse': {
         'client': 'ntp',
         'server': 'ntp',
-        'service': 'ntpd',
+        'service': salt['grains.filter_by']({
+            '11.3': 'ntp',
+            '11.4': 'ntp',
+            'default': 'ntpd',
+        }, grain='osrelease'),
         'ntpdate': 'ntpdate',
         'ntp_conf': '/etc/ntp.conf',
     },
